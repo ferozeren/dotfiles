@@ -1,0 +1,472 @@
+# [language-server.gpt]
+# command = "helix-gpt"
+# args = ["--logFile", "/tmp/helix-gpt.log"]
+
+
+[language-server.harper-ls]
+command = "harper-ls"
+args = ["--stdio"]
+
+# introduce new language server
+[language-server.scls]
+command = "simple-completion-language-server"
+
+[language-server.scls.config]
+max_completion_items = 100           # set max completion results len for each group: words, snippets, unicode-input
+feature_words = true                 # enable completion by word
+feature_snippets = true              # enable snippets
+snippets_first = true                # completions will return before snippets by default
+snippets_inline_by_word_tail = false # suggest snippets by WORD tail, for example text `xsq|` become `x^2|` when snippet `sq` has body `^2`
+feature_unicode_input = false        # enable "unicode input"
+feature_paths = true                 # enable path completion
+feature_citations = false            # enable citation completion (only on `citation` feature enabled)
+
+# write logs to /tmp/completion.log
+[language-server.scls.environment]
+RUST_LOG = "info,simple-completion-language-server=info"
+LOG_FILE = "/tmp/completion.log"
+
+
+[language-server.codebook]
+command = "codebook-lsp"
+args = ["serve"]
+
+
+[[language]]
+name = "lua"
+roots = ["lua", ".git"]
+language-servers = ["lua-language-server"]
+auto-format = true
+formatter = { command = "stylua", args = ["-"] }
+
+
+[language-server.csharp]
+command = "csharp-language-server"
+
+[language-server.omnisharp]
+command = "omnisharp"
+
+[[language]]
+name = "c-sharp"
+language-servers = ["csharp-ls", "omnisharp", "scls"]
+auto-format = true
+
+# Example use in markdown:
+[[language]]
+name = "markdown"
+# language-servers = ["scls", "codebook", "marksman", "markdown-oxide"]
+language-servers = ["marksman", "markdown-oxide", "harper-ls", "scls"]
+formatter = { command = "dprint", args = ["fmt", "--stdin", "md"] }
+auto-format = true
+
+[[language]]
+name = "typst"
+
+auto-format = true
+formatter.command = "typstyle"
+[[language]]
+name = "v"
+
+auto-format = true
+
+[[language]]
+name = "java"
+language-servers = ["jdtls", "scls"]
+auto-format = true
+
+
+[language-server.kotlin-language-server]
+command = "kotlin-language-server"
+
+[[language]]
+name = "kotlin"
+scope = "source.kotlin"
+file-types = ["kt", "kts"]
+roots = ["settings.gradle", "settings.gradle.kts"]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+indent = { tab-width = 4, unit = "    " }
+language-servers = ["kotlin-language-server", "scls"]
+auto-format = true
+
+[[grammar]]
+name = "kotlin"
+source = { git = "https://github.com/fwcd/tree-sitter-kotlin", rev = "a4f71eb9b8c9b19ded3e0e9470be4b1b77c2b569" }
+
+# [language-server.kotlin-lsp]
+# command = "kotlin-lsp"
+# args = ["--stdio"]
+
+# [[language]]
+# name = "kotlin"
+# language-servers = ["kotlin-lsp", "scls"]
+
+
+[language-server]
+deno = { command = "deno", args = ["lsp"] }
+
+[language-server.emmet-lsp]
+command = "emmet-language-server"
+args = ["--stdio"]
+
+[[language]]
+name = "c"
+auto-format = true
+language-servers = ["clangd", "scls"]
+# language-servers = ["scls", "clangd"]
+
+
+[[language]]
+name = "zig"
+auto-format = true
+language-servers = ["zls", "scls"]
+
+
+# [language-server]
+# clangd = { command = "clangd", args = [ "--clang-tidy" ] }
+
+[language-server.clangd]
+command = "clangd"
+args = ["--clang-tidy"]
+
+[[language]]
+name = "cpp"
+auto-format = true
+language-servers = ["clangd", "scls"]
+file-types = ["cpp", "h"]
+# formatter = { command = 'clang-format-15', args = ["--style=Google"] }
+formatter = { command = 'clang-format', args = ["--style=LLVM"] }
+
+
+[[language]]
+name = "cmake"
+auto-format = true
+language-servers = [{ name = "neocmakelsp" }]
+
+[language-server.neocmakelsp]
+command = "neocmakelsp"
+args = ["--stdio"]
+
+
+# [[language]]
+# # DO NOT FORGET: cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+# name = "cpp"
+# auto-format = true
+# file-types = ["cpp", "h"]
+# # Using clang-format-15 for ARM64
+# # with auto-format = true, we do not need formatter, but here for example
+# # formatter = { command = 'clang-format-15', args = ["--style=Google"] }
+# # formatting should be handled by clangd-15
+# # formatter = { command = 'clang-format-15' }
+# # formatter = { command = 'clangd-15' }
+# indent = { tab-width = 4, unit = "    " }
+# language-servers = [ "clangd" ]
+# # Have no figured out the debugger yet
+# # debugger = { command = "lldb-15" }
+
+# # Using installed clangd-15 over regular clangd
+# [language-server.clangd]
+# command = "clangd-15"
+# introduce new language server
+# [language-server.scls]
+# command = "simple-completion-language-server"
+
+# [language-server.scls.config]
+# max_completion_items = 100           # set max completion results len for each group: words, snippets, unicode-input
+# feature_words = true                 # enable completion by word
+# feature_snippets = true              # enable snippets
+# snippets_first = true                # completions will return before snippets by default
+# snippets_inline_by_word_tail = false # suggest snippets by WORD tail, for example text `xsq|` become `x^2|` when snippet `sq` has body `^2`
+# feature_unicode_input = false        # enable "unicode input"
+# feature_paths = false                # enable path completion
+# feature_citations = false            # enable citation completion (only on `citation` feature enabled)
+
+
+# # write logs to /tmp/completion.log
+# [language-server.scls.environment]
+# RUST_LOG = "info,simple-completion-language-server=info"
+# LOG_FILE = "/tmp/completion.log"
+
+[[language]]
+name = "rust"
+
+# language-servers = ["codebook", "rust-analyzer"]
+language-servers = ["rust-analyzer", "scls"]
+formatter = { command = "rustfmt" }
+# formatter = { command = "rustfmt", args = ["+nightly"] }
+
+[language-server.rust-analyzer.config]
+# check.command = "clippy"
+check.command = "check"
+
+# [language-server.rust-analyzer]
+# config = { checkOnSave = { command = "clippy" }, cargo = { allFeatures = true } }
+
+# [language-server.rust-analyzer]
+# inlayHints.bindingModeHints.enable = false
+# inlayHints.closingBraceHints.minLines = 10
+# inlayHints.closureReturnTypeHints.enable = "with_block"
+# inlayHints.discriminantHints.enable = "fieldless"
+# inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+# inlayHints.typeHints.hideClosureInitialization = false
+
+# [language-server.rust-analyzer]
+# command = "rust-analyzer"
+
+[[language]]
+name = "toml"
+language-servers = ["taplo", "scls"]
+auto-format = true
+
+[language-server.taplo.config]
+# Workaround for nonsense of being nonfunctional outside git directories
+# (https://github.com/helix-editor/helix/issues/3897#issuecomment-2361674437)
+root_dir = [".git", "*.toml"]
+
+
+[[language]]
+name = "python"
+indent = { tab-width = 4, unit = "    " }
+# language-servers = ["pyright", "ruff", "pylyzer"]
+# language-servers = ["scls", "ruff", "basedpyright"]
+# language-servers = ["scls", "ruff", "basedpyright", "ty"]
+language-servers = ["uff", "basedpyright", "ty", "scls"]
+# language-servers = ["scls", "ruff", "ty"]
+# language-servers = ["scls", "ty"]
+# language-servers = ["basedpyright", "ruff", "scls"]
+# language-servers = ["basedpyright", "ruff"]
+auto-format = true
+
+[language-server.basedpyright]
+command = "basedpyright-langserver"
+args = ["--stdio"]
+except-features = ["format", "code-action"]
+
+#[language-server.basedpyright.config]
+#basedpyright.analysis.diagnosticMode = "openFilesOnly"
+
+[language-server.basedpyright.config.basedpyright.analysis]
+autoSearchPaths = true
+typeCheckingMode = "basic"
+diagnosticMode = "openFilesOnly"
+
+#[language-server.basedpyright.config.python.analysis]
+# typeCheckingMode = "strict"
+#typeCheckingMode = "basic"
+
+# [language-server.pyright.config.python.analysis]
+# typeCheckingMode = "basic"
+
+[language-server.ty]
+command = "ty"
+args = ["server"]
+
+
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+# experiment
+
+[language-server.ruff.config.settings]
+# lineLength = 79 # Match your preferred line length
+lineLength = 88 # Match your preferred line length
+# logLevel = "debug" # Enable detailed logs for debugging
+# preview = true     # Enable experimental features
+
+[language-server.ruff.config.settings.lint]
+
+# select = [
+#   # Type annotation rules
+#   "ANN",
+#   # # pycodestyle
+#   "E",
+#   # # Pyflakes
+#   "F",
+#   # pyupgrade
+#   "UP",
+#   # # flake8-bugbear
+#   "B",
+#   # # flake8-simplify
+#   "SIM",
+#   # # isort
+#   "I",
+#   # 
+# ]
+select = [
+  "ANN", # Type annotation rules
+  "W",   #  pycodestyle W, Warning
+  "E",   #  pycodestyle E, Errors
+  "F",   #  Pyflakes
+  "UP",  #  pyupgrade
+  "C4",  # Catch incorrect use of comprehensions, dict, list, etc
+  "B",   #  flake8-bugbear
+  "SIM", #  flake8-simplify
+  "I",   #  isort
+  "FA",  # Enforce from __future__ import annotations for python prior to 3.9 and 3.10
+  "ISC", # Good use of string concatenation
+  "ICN", # Use common import conventions
+  "RET", # Good return practices
+  "TID", # Some good import practices
+  "TCH", # Move type only imports to type-checking condition.
+  "TC",  # Enforce importing certain types in a TYPE_CHECKING block
+  "PTH", # Use pathlib instead of os.path
+  #  "TD",  # Be diligent with TODO comments
+  # "NPY", # Some numpy-specific things
+  #  "G",   # Better usage of built-in logging
+  # "LOG", # Checks for issues using the standard library logging module.
+  "PYI", # Linting rules for type annotations.
+  "Q",   # Linting rules for quotes
+  # "RUF", # Ruff lint
+
+]
+
+# ignore = ["SIM112", "G004", "PLR2004", "W293", "W291", "PLR0913"]
+
+# Optionally ignore specific rules if needed# select = ["ALL"] # Enable all linting rules
+# ignore = [
+# "T201", # print
+# "W293",   #black line
+# "E303",   #black spaces
+# "W291",   #black spaces
+# "CPY001",
+# preview = true # Enable preview linting rules
+# unsafe-fixes = true # Allow unsafe fixes for code actions
+# ]
+# 
+# [language-server.ruff.config.settings.format]
+# preview = true
+# quote-style = "double"       # Enforce double quotes
+# indent-style = "space"
+# docstring-code-format = true # Format code in docstrings
+
+# [language.formatter]
+# command = "ruff"
+# args = ["format"]
+# formatter = { command = "ruff", args = ["format"] }
+
+#!experiment
+
+[language-server.pylyzer]
+command = "pylyzer"
+# args = ["--server", "--preview"]
+args = ["--server"]
+
+[[language]]
+name = "html"
+# language-servers = [ "vscode-html-language-server", "emmet-ls" ]
+language-servers = [
+  "superhtml",
+  "emmet-lsp",
+  "scls",
+] # superhtml can do formatting
+# formatter = { command = 'prettier', args = ["--parser", "html"] }
+auto-format = true
+roots = [".git"]
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server", "emmet-lsp", "scls"]
+formatter = { command = 'prettier', args = ["--parser", "css"] }
+auto-format = true
+roots = [".git"]
+
+# [language-server.vscode-css-language-server.config]
+# css = { validate = { enable = true } }
+# scss = { validate = { enable = true } }
+# less = { validate = { enable = true } }
+# provideFormatter = true
+
+[[language]]
+name = "json"
+language-servers = ["vscode-json-languageserver", "emmet-lsp", "scls"]
+formatter = { command = "prettier", args = ["--parser", "json"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "json" ] }
+auto-format = true
+roots = [".git"]
+
+# [language-server.vscode-json-language-server.config]
+# json = { validate = { enable = true }, format = { enable = true } }
+# provideFormatter = true
+
+# [language-server.deno-language-server]
+# command = "deno"
+# args = ["lsp"]
+# required-root-patterns = ["deno.json", "deno.jsonc"]
+
+# [[language]]
+# name = "typescript"
+# file-types = ["ts", "tsx"]
+# language-servers = ["deno-language-server","gpt"]
+
+
+# [[language]]
+# name = "javascript"
+# file-types = ["js", "jsx"]
+# language-servers = ["deno-language-server"]
+
+
+[[language]]
+name = "javascript"
+language-servers = ["typescript-language-server", "scls"]
+# language-servers = ["scls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "javascript" ] }
+auto-format = true
+roots = [".git"]
+
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server", "scls"]
+# language-servers = ["scls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "typescript" ] }
+auto-format = true
+roots = [".git"]
+
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server", "emmet-lsp", "scls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "jsx" ] }
+auto-format = true
+roots = [".git"]
+
+
+[[language]]
+name = "tsx"
+language-servers = ["deno", "emmet-lsp", "scls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "tsx" ] }
+auto-format = true
+roots = [".git"]
+
+
+# [[language]]
+# name = "python"
+# language-servers = [ "pyright", "ruff" ]
+# auto-format = true
+
+# [language-server.pyright.config.python.analysis]
+# typeCheckingMode = "basic"
+
+# [language-server.ruff]
+# command = "ruff-lsp"
+
+# [language-server.ruff.config.settings]
+# args = ["--ignore", "E501"]
+
+# [language-server.ruff]
+# command = "ruff-lsp"
+
+# [[language]]
+# name = "python"
+# language-servers = [ "ruff" ]
+# auto-format = true
+
+# [[language]]
+# name = "python"
+# language-servers = ["ruff", "pylsp"]
+# name = "typescript"
+# auto-format = true
+# language-servers = ["scls", "basedpyright", "ruff", "pylyzer"]

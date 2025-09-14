@@ -1,0 +1,285 @@
+
+# theme = "monokai_soda"
+# theme = "sonokai"
+# theme = "ao"
+# theme = "dracula_at_night"
+# theme = "solarized_dark"
+# theme = "tokyonight"
+# theme = "catppuccin_mocha"
+# theme = "rose_pine"
+
+# theme = "rose_pine_1"
+# theme = "rose_pine_2"
+theme = "rose_pine_t"
+# theme = "base16_transparent"
+# theme = "base16_default"
+# theme = "curzon"
+# theme = "github_dark"
+# theme = "dracula_at_night"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+
+
+[editor.statusline]
+
+mode.normal = "NOR" # Normal mode
+mode.insert = "INS" # Insert mode
+mode.select = "SEL" # Select mode
+separator = "~"
+left = [
+  "mode",
+  "spinner",
+  # "file-name",
+  # "file-base-name",
+  "file-absolute-path",
+  "read-only-indicator",
+  # "spacer",
+  "file-modification-indicator",
+]
+right = [
+  "diagnostics",
+  "file-base-name",
+  # "file-type",
+  "version-control",
+  "selections",
+  "position-percentage",
+  "total-line-numbers",
+  "file-encoding",
+  "position",
+]
+[editor.file-picker]
+hidden = false
+
+# select = "underline"
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 72
+
+[editor]
+bufferline = "multiple"
+end-of-line-diagnostics = "hint"
+true-color = true
+color-modes = true
+line-number = "relative"
+# indent-heuristic = "tree-sitter"
+# cursorline = true
+[editor.inline-diagnostics]
+
+
+cursor-line = "disable" # show warnings and errors on the cursorline inline
+other-lines = "disable"
+# other-lines = "hint"
+# 
+# [editor.inline-diagnostics]
+# cursor-line = "hint"
+# other-lines = "error"
+
+# [keys.insert]
+# # move line up
+# "A-up" = [
+#   "extend_line",
+#   "yank",
+#   "move_line_up",
+#   "open_above",
+#   "replace_with_yanked",
+#   "move_line_down",
+#   "move_line_down",
+#   "extend_line",
+#   "delete_selection",
+#   "move_line_up",
+#   "move_line_up",
+# ]
+# # move line down
+# "A-down" = ["extend_line", "delete_selection", "paste_after", "move_line_down"]
+# # duplicate line up
+# "C-A-up" = [
+#   "extend_line",
+#   "yank",
+#   "open_above",
+#   "normal_mode",
+#   "replace_with_yaned",
+#   "insert_mode",
+# ]
+# # duplicate line down
+# "C-A-down" = [
+#   "extend_line",
+#   "yank",
+#   "move_line_down",
+#   "open_above",
+#   "normal_mode",
+#   "replace_with_yanked",
+#   "insert_mode",
+# ]
+# C-h = "move_char_left"
+# C-l = "move_char_right"
+# C-j = "move_line_down"
+# C-k = "move_line_up"
+
+[keys.normal]
+
+# F5 = ":sh ~/.config/helix/code_runner/c_c++/make_raylib.sh $WEZTERM_PANE      > /dev/null"
+F5 = ":sh ~/.config/helix/code_runner/c_c++/make_update.sh $WEZTERM_PANE      > /dev/null"
+F6 = ":sh ~/.config/helix/code_runner/rust/cargo_run_force.sh $WEZTERM_PANE      > /dev/null"
+
+
+"C-n" = [
+  ':sh rm -f /tmp/unique-file',
+
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+
+  # ':insert-output GO_ROOT=1 yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+
+  # ':insert-output yazi --chooser-file=/tmp/unique-file',
+
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/unique-file}',
+  ':redraw',
+  ':set mouse false',
+  ':set mouse true',
+]
+"C-i" = "jump_backward"
+"C-o" = "jump_forward"
+
+# "C-n" = ":sh wezterm cli split-pane --left --percent 30 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE open        > /dev/null"
+# ret = ":sh ~/.config/helix/code_runner/c_c++/make_raylib.sh $WEZTERM_PANE      > /dev/null"
+# ret = ":sh ~/.config/helix/code_runner/c_c++/make_update.sh $WEZTERM_PANE      > /dev/null"
+ret = ":w"
+"q" = ":bc"
+"S-ret" = ":wq"
+"tab" = "goto_next_buffer"
+"S-tab" = "goto_previous_buffer"
+"C-v" = "@C-V"
+S-x = "extend_line_above"
+"{" = "extend_line_up"
+"}" = "extend_line_down"
+# S-x = "select_line_above"
+# v = ["extend_line_down", "extend_to_line_bounds"]
+# V = ["extend_line_above", "extend_to_line_bounds"]
+# "{" = ["extend_line_above", "extend_to_line_bounds"]
+# "}" = ["extend_line_down", "extend_to_line_bounds"]
+D = ["delete_char_backward"]
+
+
+# end-of-line-diagnostics = "hint"
+i = "@:set end-of-line-diagnostics disable<ret><A-i>"
+"A-i" = "insert_mode"
+
+
+a = "@:set end-of-line-diagnostics disable<ret><right><A-i>"
+S-a = "@:set end-of-line-diagnostics disable<ret>gl<right><A-i>"
+S-i = "@:set end-of-line-diagnostics disable<ret>gs<A-i>"
+
+
+# "o" = "@:set end-of-line-diagnostics disable<ret>k<ret>j<A-i>"
+
+o = ["open_below", ":set end-of-line-diagnostics disable"]
+
+O = ["open_above", ":set end-of-line-diagnostics disable"]
+
+
+# S-a = "@:set end-of-line-diagnostics disable<ret><right><A-i>"
+
+# i = "@:set end-of-line-diagnostics disable<ret><A-i>"
+# "A-i" = "insert_mode"
+# a = "@:set end-of-line-diagnostics disable<ret><right><A-i>"
+
+
+# i = "@:toggle inline-diagnostics.cursor-line warning disable <ret><A-i>"
+# A-i = "insert_mode"
+
+S-down = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+S-up = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before",
+]
+# "ret" = "goto_word"
+"f" = "goto_word"
+
+#buffer gn = H gp = L
+S-h = ["goto_next_buffer"]
+S-l = ["goto_previous_buffer"]
+S-q = [":buffer-close"]
+# S-w = [":write-buffer-close"]
+[keys.select]
+# "ret" = "extend_to_word"
+"f" = "extend_to_word"
+[keys.normal.space]
+# r = ":sh cargo run 2>&1 || true"
+# s = ":sh uv run main.py 2>&1 || true"
+c = ":sh make run;./main 2>&1 || true"
+# f = [":sh uvx ruff format main.py 2>&1 || true", ":rl", ":w!"]
+# i = [":toggle soft-wrap.enable", ":redraw"]
+
+
+[keys.normal.C-y]
+y = ":sh wezterm cli split-pane --left --percent 30 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE open        > /dev/null"
+Y = ":sh wezterm cli split-pane --bottom --percent 25 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE open    zoom > /dev/null"
+v = ":sh wezterm cli split-pane --right --percent 20 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE open    > /dev/null"
+V = ":sh wezterm cli split-pane --left --percent 20 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE vsplit  zoom > /dev/null"
+r = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/rust/cargo_run.sh $WEZTERM_PANE open         > /dev/null"
+R = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/rust/cargo_Run.sh  $WEZTERM_PANE vsplit       > /dev/null"
+b = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/rust/cargo_build.sh  $WEZTERM_PANE vsplit       > /dev/null"
+B = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/rust/cargo_Build.sh  $WEZTERM_PANE vsplit       > /dev/null"
+e = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/rust/cargo_check.sh $WEZTERM_PANE hsplit       > /dev/null"
+u = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/python/uv.sh  $WEZTERM_PANE vsplit      > /dev/null"
+# c = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/c_c++/ckit.sh $WEZTERM_PANE vsplit     > /dev/null"
+c = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/c_c++/ck.sh $WEZTERM_PANE vsplit     > /dev/null"
+m = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/c_c++/make.sh $WEZTERM_PANE vsplit     > /dev/null"
+# p = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/c_c++/pkit.sh $WEZTERM_PANE vsplit     > /dev/null"
+p = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/c_c++/pk.sh $WEZTERM_PANE vsplit     > /dev/null"
+z = ":sh wezterm cli split-pane --bottom --percent 20 -- ~/.config/helix/code_runner/zig/zig.sh $WEZTERM_PANE hsplit    > /dev/null"
+l = ":sh wezterm cli split-pane --bottom --percent 1 -- ~/.config/helix/code_runner/live-server/server.sh $WEZTERM_PANE hsplit    > /dev/null"
+
+# i = ":sh ~/.config/helix/code_runner/rust/cargo_run_update.sh $WEZTERM_PANE > /dev/null"
+
+i = ":sh ~/.config/helix/code_runner/rust/cargo_run_update.sh $WEZTERM_PANE > /dev/null"
+
+[keys.normal.A-y]
+# y = ":sh ~/.config/helix/wezilix_update.sh $WEZTERM_PANE          > /dev/null"
+# Y = ":sh ~/.config/helix/wezilix_update.sh $WEZTERM_PANE      > /dev/null"
+# v = ":sh ~/.config/helix/wezilix_update.sh $WEZTERM_PANE     > /dev/null"
+# V = ":sh ~/.config/helix/wezilix_update.sh $WEZTERM_PANE    > /dev/null"
+r = ":sh ~/.config/helix/code_runner/rust/cargo_run_update.sh $WEZTERM_PANE > /dev/null"
+R = ":sh ~/.config/helix/code_runner/rust/cargo_Run_update.sh  $WEZTERM_PANE       > /dev/null"
+b = ":sh ~/.config/helix/code_runner/rust/cargo_build_update.sh  $WEZTERM_PANE        > /dev/null"
+B = ":sh ~/.config/helix/code_runner/rust/cargo_Build_update.sh  $WEZTERM_PANE        > /dev/null"
+e = ":sh ~/.config/helix/code_runner/rust/cargo_check_update.sh $WEZTERM_PANE        > /dev/null"
+u = ":sh ~/.config/helix/code_runner/python/uv_update.sh  $WEZTERM_PANE       > /dev/null"
+m = ":sh ~/.config/helix/code_runner/c_c++/make_update.sh $WEZTERM_PANE      > /dev/null"
+c = ":sh ~/.config/helix/code_runner/c_c++/ck_update.sh $WEZTERM_PANE      > /dev/null"
+# c = ":sh ~/.config/helix/code_runner/c_c++/ckit_update.sh $WEZTERM_PANE      > /dev/null"
+# p = ":sh ~/.config/helix/code_runner/c_c++/pkit_update.sh $WEZTERM_PANE      > /dev/null"
+p = ":sh ~/.config/helix/code_runner/c_c++/pk_update.sh $WEZTERM_PANE      > /dev/null"
+z = ":sh ~/.config/helix/code_runner/zig/zig_update.sh $WEZTERM_PANE     > /dev/null"
+l = ":sh ~/.config/helix/code_runner/live-server/server_update.sh $WEZTERM_PANE     > /dev/null"
+
+
+[keys.insert]
+
+
+# k = { j = "normal_mode" }                                    # Maps `jk` to exit insert mode
+C-h = "delete_word_backward"
+"A-esc" = "normal_mode"
+"esc" = "@<A-esc>:set end-of-line-diagnostics hint<ret>"
+# j = { k = "@<A-esc>:set end-of-line-diagnostics hint<ret>" }
+
+[keys.select.ret]
+s = [":write-all", ":insert-output scooter >/dev/tty", ":redraw", ":reload-all"]
+
+
+# esc = "@<A-esc>:toggle inline-diagnostics.cursor-line warning hint <ret>"
+# A-esc = "normal_mode"
+
+
+# [keys.normal.C-y]
+# y = ":sh wezterm cli split-pane --bottom --percent 30 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE open         > /dev/null"
+# v = ":sh wezterm cli split-pane --left --percent 30 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE vsplit       > /dev/null"
+# h = ":sh wezterm cli split-pane --left --percent 30 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE hsplit       > /dev/null"
+# Y = ":sh wezterm cli split-pane --bottom --percent 30 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE open    zoom > /dev/null"
+# V = ":sh wezterm cli split-pane --left --percent 30 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE vsplit  zoom > /dev/null"
+# H = ":sh wezterm cli split-pane --left --percent 30 -- ~/.config/helix/wezilix.sh $WEZTERM_PANE hsplit  zoom > /dev/null"
