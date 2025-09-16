@@ -32,7 +32,7 @@ config.default_cursor_style = "BlinkingBar"
 -- config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.window_decorations = "NONE"
 -- config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.9
+-- config.window_background_opacity = 0.9
 -- config.window_background_opacity = 0.8
 -- config.window_background_opacity = 0.8
 -- config.window_background_opacity = 0.85
@@ -51,9 +51,6 @@ config.window_background_opacity = 0.9
 
 config.initial_cols = 87
 config.initial_rows = 28
-
--- config.initial_cols = 37
--- config.initial_rows = 28
 
 -- config.initial_cols = 120
 -- config.initial_rows= 24
@@ -129,12 +126,8 @@ config.window_padding = {
 	-- top=10, -- for 14 font size  and 1.175
 
 	-- top = 7, -- for 14 font size  and 1.175
-
-	-- top = 3, -- for 14 font size  and 1.175
-	-- left = 2,
-	top = 0, -- for 14 font size  and 1.175
-	left = 0,
-
+	top = 3, -- for 14 font size  and 1.175
+	left = 2,
 	right = 0,
 	bottom = 0,
 
@@ -399,6 +392,6 @@ config.color_scheme = "rose-pine"
 -- config.color_scheme = "Dracula (base16)"
 -- config.color_scheme = 'Batman'
 -- config.color_scheme = ''
-frond_end = "WebGpu"
+-- frond_end = "WebGpu"
 -- and finally, return the configuration to wezterm
 return config
