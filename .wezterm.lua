@@ -399,6 +399,6 @@ config.color_scheme = "rose-pine"
 -- config.color_scheme = "Dracula (base16)"
 -- config.color_scheme = 'Batman'
 -- config.color_scheme = ''
-frond_end = "WebGpu"
+-- frond_end = "WebGpu"
 -- and finally, return the configuration to wezterm
 return config

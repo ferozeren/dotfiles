@@ -1,16 +1,8 @@
 source /usr/share/cachyos-fish-config/cachyos-config.fish
 
-set -x EDITOR helix
-
 # Paths
 
-# Cargo binary Path
 fish_add_path ~/.cargo/bin/
-
-# Flutter SDK Path
-fish_add_path -g -p ~/development/flutter/bin
-
-export CHROME_EXECUTABLE="/bin/google-chrome-stable"
 
 # Aliases
 
